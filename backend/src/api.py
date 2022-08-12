@@ -28,15 +28,15 @@ CORS(app)
 db_drop_and_create_all()
 
 # ROUTES
-  @app.after_request
-  def after_request(response):
-  """ Function that sets request allowances """
-      response.headers.add("Access-Control-Allow-Headers", 
-                          "Content-Type,Authorization,true")
-      response.headers.add("Access-Control-Allow-Methods", 
-                            "GET,PUT,POST,DELETE,OPTIONS")
+@app.after_request
+def after_request(response):
+""" Function that sets request allowances """
+    response.headers.add("Access-Control-Allow-Headers", 
+                        "Content-Type,Authorization,true")
+    response.headers.add("Access-Control-Allow-Methods", 
+                        "GET,PUT,POST,DELETE,OPTIONS")
 
-      return response
+    return response
 
 
 
@@ -209,27 +209,38 @@ def unprocessable(error):
     }), 422
 
 
-'''
-@TODO implement error handlers using the @app.errorhandler(error) decorator
-    each error handler should return (with approprate messages):
-             jsonify({
-                    "success": False,
-                    "error": 404,
-                    "message": "resource not found"
-                    }), 404
+@app.errorhandler(404)
+def not_found(error):
+    return (
+        jsonify({
+        "success": False, 
+        "error": 404, 
+        "message": "Resource not found"})
+    ), 404
 
-'''
+@app.errorhandler(400)
+def bad_request(error):
+    return jsonify({
+        "success": False, 
+        "error": 400, 
+        "message": "Bad request"
+    }), 400
 
-'''
-@TODO implement error handler for 404
-    error handler should conform to general task above
-'''
+@app.errorhandler(500)
+def server_error(error):
+    return jsonify({
+        "success": False,
+        "error": 500,
+        "message": "Internal server error"
+    }), 500
 
-
-'''
-@TODO implement error handler for AuthError
-    error handler should conform to general task above
-'''
+@app.errorhandler(AuthError)
+def not_authorized(auth_error):
+    return jsonify({
+        "success": False,
+        "error": auth_error.status_code,
+        "message": "Not authorized" + auth_error.error
+    }), 401
 
 if __name__ == "__main__":
     app.debug = True
