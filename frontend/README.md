@@ -38,6 +38,8 @@ Ionic ships with a useful development server which detects changes and transpile
 
 ```bash
 ionic serve
+
+(npm run ng serve) on windows
 ```
 
 > _tip_: Do not use **ionic serve** in production. Instead, build Ionic into a build artifact for your desired platforms.

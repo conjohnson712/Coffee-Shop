@@ -2,6 +2,7 @@ venv/
 .vscode/
 __pycache__/
 test.db
+notes.txt
 
 # OS generated files #
 ######################
