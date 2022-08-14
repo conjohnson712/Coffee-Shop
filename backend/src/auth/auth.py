@@ -7,7 +7,7 @@ from urllib.request import urlopen
 
 AUTH0_DOMAIN = 'coffee-shop-conjohn712.us.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'coffee'
+API_AUDIENCE = 'https://coffee/'
 
 # REFERENCE FOR THIS WHOLE FILE: https://github.com/udacity/FSND/blob/master/BasicFlaskAuth/app.py
 
@@ -36,7 +36,7 @@ def get_token_auth_header():
         }, 401)
 
     # Split authorization header into parts
-    part = auth.split()
+    parts = auth.split()
 
     #If the first part is not 'bearer', raise a 401 error (Great rhyme)
     if parts[0].lower() != 'bearer':
