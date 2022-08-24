@@ -7,7 +7,7 @@ from urllib.request import urlopen
 
 AUTH0_DOMAIN = 'coffee-shop-conjohn712.us.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'https://coffee/'
+API_AUDIENCE = 'coffee'
 
 # REFERENCE FOR THIS WHOLE FILE: https://github.com/udacity/FSND/blob/master/BasicFlaskAuth/app.py
 
